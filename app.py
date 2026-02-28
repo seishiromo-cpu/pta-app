@@ -4,20 +4,21 @@ import pandas as pd
 
 model = joblib.load("pta_model.pkl")
 
-st.title("PTA予測アプリ")
+st.title("PTA予測アプリ　大石内科クリニック")
 st.write("各項目を入力してください")
 
-PoorFlow = st.selectbox("PoorFlow", [0,1])
-IntermittentSound = st.selectbox("IntermittentSound", [0,1])
-WeakSound = st.selectbox("WeakSound", [0,1])
-Depression = st.selectbox("Depression", [0,1])
-StenosisSound = st.selectbox("StenosisSound", [0,1])
-Edema = st.selectbox("Edema", [0,1])
-Recirculation = st.selectbox("Recirculation", [0,1])
-PoorHemostasis = st.selectbox("PoorHemostasis", [0,1])
-PalpableStenosis = st.selectbox("PalpableStenosis", [0,1])
 FV = st.number_input("FV", value=300.0)
 RI = st.number_input("RI", value=0.6)
+PoorFlow = st.selectbox("脱血不良", [0,1])
+IntermittentSound = st.selectbox("断続音", [0,1])
+WeakSound = st.selectbox("シャント音減弱", [0,1])
+Depression = st.selectbox("シャント挙上にて凹み", [0,1])
+StenosisSound = st.selectbox("狭窄音聴取", [0,1])
+Edema = st.selectbox("浮腫み", [0,1])
+Recirculation = st.selectbox("再循環率上昇", [0,1])
+PoorHemostasis = st.selectbox("止血不良", [0,1])
+PalpableStenosis = st.selectbox("狭窄音聴取", [0,1])
+
 
 if st.button("予測する"):
     input_data = pd.DataFrame([[PoorFlow, IntermittentSound, WeakSound,
@@ -37,3 +38,4 @@ if st.button("予測する"):
         st.error("PTA高リスク")
     else:
         st.success("PTA低リスク")
+
